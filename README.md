@@ -11,9 +11,7 @@
 | first_name         | string | null: false              |
 | last_name_katakana | string | null: false              |
 | first_name_katakana| string | null: false              |
-| birthday_year      | integer| null: false              |
-| birthday_month     | integer| null: false              |
-| birthday_day       | integer| null: false              |
+| birthday           | date   | null: false              |
 
 ### Association
  - has_many :items
@@ -21,22 +19,21 @@
 
 ## Items テーブル
 
-| Column           | Type       | Options                        |
-|------------------|------------|--------------------------------|
-| image            | string     | null: false                    |
-| product          | string     | null: false                    |
-| explanation      | text       | null: false                    |
-| category         | string     | null: false                    |
-| condition        | string     | null: false                    |
-| shipping_charges | string     | null: false                    |
-| shipping_name    | string     | null: false                    |
-| days_to_ship     | string     | null: false                    |
-| price            | integer    | null: false                    |
-| user             | references | null: false, foreign_key: true |
+| Column           | Type        | Options                        |
+|------------------|-------------|--------------------------------|
+| product          | string      | null: false                    |
+| explanation      | text        | null: false                    |
+| category         | integer     | null: false                    |
+| condition        | integer     | null: false                    |
+| shipping_charges | integer     | null: false                    |
+| shipping_area    | integer     | null: false                    |
+| days_to_ship     | integer     | null: false                    |
+| price            | integer     | null: false                    |
+| user             | references  | null: false, foreign_key: true |
+
 ### Association
  - belongs_to :user
  - has_one :buy
- - has_one :address
 
 ## Buys テーブル
 
@@ -53,12 +50,11 @@
 
 | Column       | Type    | Options     |
 |--------------|---------|-------------|
-| postal_code  | integer | null: false |
+| postal_code  | string  | null: false |
 | prefectures  | string  | null: false |
 | municipality | string  | null: false |
 | address      | string  | null: false |
 | building     | string  |             |
-| phone        | integer | null: false |
+| phone        | string  | null: false |
 
 ### Association
- - belongs_to :item
