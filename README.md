@@ -1,24 +1,64 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options                  |
+|--------------------|--------|--------------------------|
+| nickname           | string | null: false              |
+| email              | string | null: false, unique: true|
+| password           | string | null: false              |
+| last_name          | string | null: false              |
+| first_name         | string | null: false              |
+| last_name_katakana | string | null: false              |
+| first_name_katakana| string | null: false              |
+| birthday_year      | integer| null: false              |
+| birthday_month     | integer| null: false              |
+| birthday_day       | integer| null: false              |
 
-* Ruby version
+### Association
+ - has_many :items
+ - has_many :buys
 
-* System dependencies
+## Items テーブル
 
-* Configuration
+| Column           | Type       | Options                        |
+|------------------|------------|--------------------------------|
+| image            | string     | null: false                    |
+| product          | string     | null: false                    |
+| explanation      | text       | null: false                    |
+| category         | string     | null: false                    |
+| condition        | string     | null: false                    |
+| shipping_charges | string     | null: false                    |
+| shipping_name    | string     | null: false                    |
+| days_to_ship     | string     | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
+### Association
+ - belongs_to :user
+ - has_one :buy
+ - has_one :address
 
-* Database creation
+## Buys テーブル
 
-* Database initialization
+|Column| Type       | Options     |
+|------|------------|-------------|
+| user | references | null: false |
+| item | references | null: false |
 
-* How to run the test suite
+### Association
+ - belongs_to :user
+ - belongs_to :item
 
-* Services (job queues, cache servers, search engines, etc.)
+## Addresses テーブル
 
-* Deployment instructions
+| Column       | Type    | Options     |
+|--------------|---------|-------------|
+| postal_code  | integer | null: false |
+| prefectures  | string  | null: false |
+| municipality | string  | null: false |
+| address      | string  | null: false |
+| building     | string  |             |
+| phone        | integer | null: false |
 
-* ...
+### Association
+ - belongs_to :item
