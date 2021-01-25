@@ -48,14 +48,14 @@
  - has_one :address
 ## Addresses テーブル
 
-| Column       | Type    | Options     |
-|--------------|---------|-------------|
-| postal_code  | string  | null: false |
-| prefectures  | string  | null: false |
-| municipality | string  | null: false |
-| address      | string  | null: false |
-| building     | string  |             |
-| phone        | string  | null: false |
+| Column            | Type    | Options     |
+|-------------------|---------|-------------|
+| postal_code       | string  | null: false |
+| shipping_area_id  | string  | null: false |
+| municipality      | string  | null: false |
+| address           | string  | null: false |
+| building          | string  |             |
+| phone             | string  | null: false |
 
 ### Association
  - belongs_to :buy
