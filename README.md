@@ -45,7 +45,7 @@
 ### Association
  - belongs_to :user
  - belongs_to :item
-
+ - has_one :address
 ## Addresses テーブル
 
 | Column       | Type    | Options     |
@@ -58,3 +58,4 @@
 | phone        | string  | null: false |
 
 ### Association
+ - belongs_to :buy
