@@ -18,6 +18,6 @@ class Item < ApplicationRecord
               :shipping_area_id, :days_to_ship_id
   end
 
-  validates :price, numericality: true
+  validates :price, numericality: true,format: {with: /\A[0-9]+\z/}
   validates_inclusion_of :price, in: 300..9_999_999, message: 'Out of setting range'
 end
