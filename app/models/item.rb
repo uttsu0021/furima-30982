@@ -13,11 +13,11 @@ class Item < ApplicationRecord
             :price, :image,
             presence: true
 
-  with_options numericality: { other_than: 1 ,message: 'Select'} do
+  with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id, :condition_id, :shipping_charge_id,
               :shipping_area_id, :days_to_ship_id
   end
 
   validates :price, numericality: true
- validates_inclusion_of :price, in:300..9999999, message: 'Out of setting range'
+  validates_inclusion_of :price, in: 300..9_999_999, message: 'Out of setting range'
 end
