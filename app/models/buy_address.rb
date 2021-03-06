@@ -3,10 +3,10 @@ class BuyAddress
    attr_accessor :postal_code, :shipping_area_id, :municipality, :address, :building, :phone,:item_id,:user_id,:buy_id
    
    with_options presence: true do
-     validates :postal_code, format: {with: /\A\d{3}[-]\d{4}\z/, message: "code can't be blank" }
+     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
      validates :municipality
      validates :address
-     validates :phone, format: {with: /\A\d{11}\z/, message: "number can't be blank" }
+     validates :phone, format: {with: /\A\d{11}\z/, message: "Phone number Input only number" }
    end
 
    validates :shipping_area_id, numericality: { other_than: 1, message: "can't be blank" }
