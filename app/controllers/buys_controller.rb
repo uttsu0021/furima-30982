@@ -3,12 +3,8 @@ class BuysController < ApplicationController
   def index
     @buy_address = BuyAddress.new
     @item = Item.find(params[:item_id])
-    if current_user == @item.user
-      redirect_to root_path
-    end
-    if @buy_address.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user == @item.user
+    redirect_to root_path if @buy_address.present?
   end
 
   def create
@@ -24,17 +20,18 @@ class BuysController < ApplicationController
   end
 
   private
-  def buy_address_params
-    params.require(:buy_address).permit(:postal_code, :shipping_area_id, :municipality, :address, :building, :phone).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
-  end
 
-  def pay_buy
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 自身のPAY.JPテスト秘密鍵を記述しましょう
-    Payjp::Charge.create(
-      amount: @item.price,# 商品の値段
-      card: buy_address_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+  def buy_address_params
+    params.require(:buy_address).permit(:postal_code, :shipping_area_id, :municipality, :address, :building, :phone).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
 
+  def pay_buy
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      amount: @item.price, # 商品の値段
+      card: buy_address_params[:token], # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
+  end
 end

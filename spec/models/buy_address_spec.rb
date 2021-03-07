@@ -42,14 +42,14 @@ RSpec.describe BuyAddress, type: :model do
   it 'phoneは半角数字以外だと保存できないこと' do
     @buy_address.phone = '０９０１２３４５６７８'
     @buy_address.valid?
-    expect(@buy_address.errors.full_messages).to include("Phone number Input only number")
+    expect(@buy_address.errors.full_messages).to include('Phone number Input only number')
   end
   it 'buildingは空でも保存できること' do
     @buy_address.building = ''
     expect(@buy_address).to be_valid
   end
 
-  it "tokenが空では登録できないこと" do
+  it 'tokenが空では登録できないこと' do
     @buy_address.token = nil
     @buy_address.valid?
     expect(@buy_address.errors.full_messages).to include("Token can't be blank")
