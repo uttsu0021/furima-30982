@@ -4,7 +4,7 @@ class BuysController < ApplicationController
     @buy_address = BuyAddress.new
     @item = Item.find(params[:item_id])
     redirect_to root_path if current_user == @item.user
-    redirect_to root_path if @buy_address.present?
+    redirect_to root_path if @buy_address.blank?
   end
 
   def create
@@ -29,7 +29,8 @@ class BuysController < ApplicationController
 
   def pay_buy
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      amount: @item.price, # 商品の値段
+    Payjp::Charge.create(
+      amount: @item[:price], # 商品の値段
       card: buy_address_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
