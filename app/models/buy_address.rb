@@ -8,6 +8,8 @@ class BuyAddress
     validates :address
     validates :phone, format: { with: /\A\d{11}\z/, message: 'number Input only number' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   validates :shipping_area_id, numericality: { other_than: 1, message: "can't be blank" }
